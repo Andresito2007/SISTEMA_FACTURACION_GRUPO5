@@ -1,7 +1,7 @@
-package com.sistema_facturacion.GRUPITO_5.Controladores;
+package com.sistema_facturacion.GRUPITO_5.controller;
 
-import com.sistema_facturacion.GRUPITO_5.Entidades.Cliente;
-import com.sistema_facturacion.GRUPITO_5.Servicios.ServicioCliente;
+import com.sistema_facturacion.GRUPITO_5.entity.Cliente;
+import com.sistema_facturacion.GRUPITO_5.service.ServicioCliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

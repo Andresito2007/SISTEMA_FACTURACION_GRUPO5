@@ -1,9 +1,9 @@
-package com.sistema_facturacion.GRUPITO_5.Servicios;
+package com.sistema_facturacion.GRUPITO_5.service;
 
-import com.sistema_facturacion.GRUPITO_5.Entidades.Producto;
-import com.sistema_facturacion.GRUPITO_5.Entidades.Venta;
-import com.sistema_facturacion.GRUPITO_5.Repositorios.RepositorioProducto;
-import com.sistema_facturacion.GRUPITO_5.Repositorios.RepositorioVenta;
+import com.sistema_facturacion.GRUPITO_5.entity.Producto;
+import com.sistema_facturacion.GRUPITO_5.entity.Venta;
+import com.sistema_facturacion.GRUPITO_5.repository.RepositorioProducto;
+import com.sistema_facturacion.GRUPITO_5.repository.RepositorioVenta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,7 +1,7 @@
-package com.sistema_facturacion.GRUPITO_5.Servicios;
+package com.sistema_facturacion.GRUPITO_5.service;
 
-import com.sistema_facturacion.GRUPITO_5.Entidades.Cliente;
-import com.sistema_facturacion.GRUPITO_5.Repositorios.RepositorioCliente;
+import com.sistema_facturacion.GRUPITO_5.entity.Cliente;
+import com.sistema_facturacion.GRUPITO_5.repository.RepositorioCliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

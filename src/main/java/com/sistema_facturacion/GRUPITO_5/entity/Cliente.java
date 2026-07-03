@@ -1,4 +1,4 @@
-package com.sistema_facturacion.GRUPITO_5.Entidades;
+package com.sistema_facturacion.GRUPITO_5.entity;
 
 import jakarta.persistence.*;
 

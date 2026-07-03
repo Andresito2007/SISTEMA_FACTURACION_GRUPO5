@@ -1,6 +1,6 @@
-package com.sistema_facturacion.GRUPITO_5.Repositorios;
+package com.sistema_facturacion.GRUPITO_5.repository;
 
-import com.sistema_facturacion.GRUPITO_5.Entidades.Compra;
+import com.sistema_facturacion.GRUPITO_5.entity.Compra;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
