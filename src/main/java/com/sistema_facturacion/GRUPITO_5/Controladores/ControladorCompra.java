@@ -1,8 +1,10 @@
 package com.sistema_facturacion.GRUPITO_5.Controladores;
+
 import com.sistema_facturacion.GRUPITO_5.Entidades.Compra;
 import com.sistema_facturacion.GRUPITO_5.Servicios.ServicioCompra;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -33,7 +35,7 @@ public class ControladorCompra {
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public boolean eliminarCompraId(@PathVariable Long id) {
-        return servicioCompra.eliminarCompra(id);
+    public void eliminarCompraId(@PathVariable Long id) {
+        servicioCompra.eliminarCompra(id);
     }
 }

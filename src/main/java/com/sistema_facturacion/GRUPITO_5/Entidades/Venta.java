@@ -1,21 +1,29 @@
 package com.sistema_facturacion.GRUPITO_5.Entidades;
-//Importamos el paquete LocalDateTime para representar fecha y hora
-import java.time.LocalDateTime;
-// Definimos una clase llamada Venta
-public class Venta{
-    // Definimos los atributos de Venta
-    // Usamos private para que nuestras variables no seand accedidas directamente desde otra clase.
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "ventas")
+public class Venta {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String numeroVenta;
+
+    @ManyToOne
+    @JoinColumn(name = "producto_id", nullable = false)
     private Producto producto;
+
     private Integer cantidad;
     private Double total;
-    private String estado;
-    // DEFINIMOS NUESTRO CONSTRUCTOR  VENTA
-    public Venta(){
-        this.estado = "REGISTRADA"; // YA DEFINIMOS NUESTRO  ESTADO COMO REGISTRADO
-    }
-    // CREAMOS NUESTROS METODOS
+
+    @Column(nullable = false)
+    private String estado = "REGISTRADA";
+
+    public Venta() {}
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

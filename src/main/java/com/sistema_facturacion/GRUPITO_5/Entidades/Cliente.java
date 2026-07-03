@@ -1,44 +1,52 @@
 package com.sistema_facturacion.GRUPITO_5.Entidades;
-//CREAMOS NUESTRA CLASE CLIENTE
-public class Cliente{
-    // Definimos los atributos del Cliente
-    // Usamos private para que nuestras variables no seand accedidas directamente desde otra clase.
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "clientes")
+public class Cliente {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String nombre;
+    @Column(unique = true)
     private String email;
+    @Column(unique = true)
     private String dni;
-    // DEFINIMOS NUESTRO CONSTRUCTOR LLAMADO CLIENTE
-    public Cliente(){}
-    // CREAMOS NUESTROS METODOS
-    public Long getId(){
+
+    public Cliente() {}
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Long id){
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getNombre(){
+    public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre){
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public String getEmail(){
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email){
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getDni(){
+    public String getDni() {
         return dni;
     }
 
-    public void setDni(String dni){
+    public void setDni(String dni) {
         this.dni = dni;
     }
 }

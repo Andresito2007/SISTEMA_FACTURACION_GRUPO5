@@ -2,40 +2,46 @@ package com.sistema_facturacion.GRUPITO_5.Servicios;
 
 import com.sistema_facturacion.GRUPITO_5.Entidades.Compra;
 import com.sistema_facturacion.GRUPITO_5.Entidades.Producto;
+import com.sistema_facturacion.GRUPITO_5.Repositorios.RepositorioCompra;
+import com.sistema_facturacion.GRUPITO_5.Repositorios.RepositorioProducto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-// importamos el paquete dde util para crear nuestras listas
-import java.util.ArrayList;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
+
 @Service
 public class ServicioCompra {
-    private List<Compra> lista = new ArrayList<>();
-    private Long contadorId = 1L;
-    // Necesitamos instanciar ProductoService para buscar y descontar stock
-    //Las clases que están en la misma carpeta no necesitamos importarlas y lu samo porque esta  depende de otra para funcionar.
+
     @Autowired
-    private ServicioProducto productoService;
+    private RepositorioCompra repositorioCompra;
+
+    @Autowired
+    private RepositorioProducto repositorioProducto;
+
+    @Transactional
     public Compra registrarCompra(Compra compra) {
-        Producto producto = productoService.buscarProducto(compra.getProducto().getId());
+        Producto producto = repositorioProducto.findById(compra.getProducto().getId())
+                .orElseThrow(() -> new RuntimeException("PRODUCTO NO ENCONTRADO , SU ID ES : " + compra.getProducto().getId()));
         double total = compra.getPrecioUnitario() * compra.getCantidad();
         compra.setTotal(total);
         compra.setProducto(producto);
+        compra.setEstado("REGISTRADA");
         producto.setStock(producto.getStock() + compra.getCantidad());
-        compra.setId(contadorId++);
-        lista.add(compra);
-        return compra;
+        repositorioProducto.save(producto);
+        return repositorioCompra.save(compra);
     }
+
     public List<Compra> listarCompras() {
-        return lista;
+        return repositorioCompra.findAll();
     }
+
     public Compra buscarCompra(Long id) {
-        for (Compra c : lista) {
-            if (c.getId().equals(id)) {
-                return c;
-            }
-        }
-        throw new RuntimeException("COMPRA NO ENCONTRADA CON ID: " + id);
+        return repositorioCompra.findById(id)
+                .orElseThrow(() -> new RuntimeException("COMPRA NO ENCONTRADA CON ID: " + id));
     }
+
+    @Transactional
     public Compra anularCompra(Long id) {
         Compra compra = buscarCompra(id);
         if ("ANULADA".equals(compra.getEstado())) {
@@ -43,14 +49,17 @@ public class ServicioCompra {
         }
         Producto producto = compra.getProducto();
         producto.setStock(producto.getStock() - compra.getCantidad());
+        repositorioProducto.save(producto);
         compra.setEstado("ANULADA");
-        return compra;
+        return repositorioCompra.save(compra);
     }
-    public boolean eliminarCompra(Long id) {
+
+    @Transactional
+    public void eliminarCompra(Long id) {
         Compra compra = buscarCompra(id);
         Producto producto = compra.getProducto();
         producto.setStock(producto.getStock() - compra.getCantidad());
-        lista.remove(compra);
-        return true;
+        repositorioProducto.save(producto);
+        repositorioCompra.delete(compra);
     }
 }

@@ -1,13 +1,16 @@
 package com.sistema_facturacion.GRUPITO_5.Controladores;
+
 import com.sistema_facturacion.GRUPITO_5.Entidades.Venta;
 import com.sistema_facturacion.GRUPITO_5.Servicios.ServicioVenta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/venta")
 public class ControladorVenta {
+
     @Autowired
     private ServicioVenta servicioVenta;
 
@@ -32,7 +35,7 @@ public class ControladorVenta {
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public boolean eliminarVentaId(@PathVariable Long id) {
-        return servicioVenta.eliminarVenta(id);
+    public void eliminarVentaId(@PathVariable Long id) {
+        servicioVenta.eliminarVenta(id);
     }
 }

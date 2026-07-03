@@ -1,19 +1,28 @@
 package com.sistema_facturacion.GRUPITO_5.Entidades;
-//CREAMOS NUESTRA CLASE COMPRA
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "compras")
 public class Compra {
-    // Definimos los atributos del Compra
-    // Usamos private para que nuestras variables no seand accedidas directamente desde otra clase.
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "producto_id", nullable = false)
     private Producto producto;
+
     private Integer cantidad;
     private Double precioUnitario;
     private Double total;
-    private String estado;
-    // DEFINIMOS NUESTRO CONSTRUCTOR LLAMADO COMPRA
-    public Compra() {
-        this.estado = "REGISTRADA";// YA DEFINIMOS NUESTRO  ESTADO COMO REGISTRADO
-    }
-    // CREAMOS NUESTROS METODOS
+
+    @Column(nullable = false)
+    private String estado = "REGISTRADA";
+
+    public Compra() {}
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
