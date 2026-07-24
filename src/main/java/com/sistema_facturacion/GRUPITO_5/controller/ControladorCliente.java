@@ -6,14 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+// INDICAMOS QUE ES DE TIPO REST
 @RestController
+// DEBE TENER /CLIENTE ANTES DE UTILIZAR CUALQUIER PETI HHTP
 @RequestMapping("/cliente")
 public class ControladorCliente {
 
     @Autowired
     private ServicioCliente servicioCliente;
-
+    // NUESTRAS PETICIONES HTTP
     @PostMapping("/registrar")
     public Cliente registrarCliente(@RequestBody Cliente cliente) {
         return servicioCliente.crearCliente(cliente);
