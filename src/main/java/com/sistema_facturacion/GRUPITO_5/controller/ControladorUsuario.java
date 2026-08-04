@@ -1,6 +1,5 @@
 package com.sistema_facturacion.GRUPITO_5.controller;
 
-
 import com.sistema_facturacion.GRUPITO_5.entity.Usuario;
 import com.sistema_facturacion.GRUPITO_5.repository.RepositorioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;

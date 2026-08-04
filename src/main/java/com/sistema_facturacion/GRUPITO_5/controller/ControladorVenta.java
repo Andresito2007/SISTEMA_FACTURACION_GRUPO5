@@ -3,9 +3,9 @@ package com.sistema_facturacion.GRUPITO_5.controller;
 import com.sistema_facturacion.GRUPITO_5.entity.Venta;
 import com.sistema_facturacion.GRUPITO_5.service.ServicioVenta;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/venta")
@@ -18,10 +18,17 @@ public class ControladorVenta {
     public Venta registrarVenta(@RequestBody Venta venta) {
         return servicioVenta.procesarVenta(venta);
     }
-
+    //@RequestParam → captura un parámetro que viene en la URL después de ?
+    //defaultValue = "0" eso signifca que si el usuario no pone el parámetro, usa la pagina 0 por defecto
+    //int page = lo guarda en esta variable como número entero
+    // por ejemplo si: URL: /compra/listar = page = 0 (por defecto)
+    // URL: /compra/listar?page=2   = page = 2 (el usuario lo puso)
+    // en mi caso se muestran 5 ventas cada pagina pa no saturarlo
     @GetMapping("/listar")
-    public List<Venta> listarVenta() {
-        return servicioVenta.listarVentas();
+    public Page<Venta> listarVenta(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size) {
+        return servicioVenta.listarVentas(PageRequest.of(page, size));
     }
 
     @GetMapping("/{id}")

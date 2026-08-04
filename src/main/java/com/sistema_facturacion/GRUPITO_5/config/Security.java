@@ -50,6 +50,4 @@ public class Security {
        // RETORNAMOS EL SecurityFilter
         return http.build();
     }
-
-
 }

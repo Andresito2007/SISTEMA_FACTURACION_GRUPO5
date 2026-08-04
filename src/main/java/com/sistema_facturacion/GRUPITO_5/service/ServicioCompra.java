@@ -6,9 +6,10 @@ import com.sistema_facturacion.GRUPITO_5.entity.Producto;
 import com.sistema_facturacion.GRUPITO_5.repository.RepositorioCompra;
 import com.sistema_facturacion.GRUPITO_5.repository.RepositorioProducto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
 
 // INDICAMOS QUE ESTA CLASE ES DE TIPO SERVICIO
 @Service    
@@ -37,9 +38,14 @@ public class ServicioCompra {
         return repositorioCompra.save(compra);
     }
     // METODO 2 : LISTAR COMPRAS
-
-    public List<Compra> listarCompras() {
-        return repositorioCompra.findAll();
+    //USAMOS PAGEABLE QUE ES UN OBEJTO QUE SPRING USA INSTRUCCION DE PAGINACION QUE TIENES
+    //- page → número de página (0, 1, 2...)
+    //- size → cuántos ítems por página (en mi caso 5)
+    //EN EL CONTROLLER HACEMOS:
+    //PageRequest.of(page, size)  // ACA SE CREA EL PAGEABLE
+    //Y  SE LO PASAMOS A SERVICE , EL RECIBE Y LO USO.
+    public Page<Compra> listarCompras(Pageable pageable) {
+        return repositorioCompra.findAll(pageable);
     }
 
     public Compra buscarCompra(Long id) {

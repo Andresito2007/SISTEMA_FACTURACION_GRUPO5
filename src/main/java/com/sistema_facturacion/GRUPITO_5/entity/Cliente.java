@@ -15,7 +15,7 @@ public class Cliente {
     @Column(unique = true)
     private String email;
     @Column(unique = true)
-    private String dni;
+     private String dni;
 
     // DEFINIMOS NUESTRO CONSTRUCTOR
     public Cliente() {}
